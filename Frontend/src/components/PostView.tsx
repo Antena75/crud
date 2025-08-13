@@ -1,0 +1,64 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+interface Post {
+  id: number;
+  content: string;
+  created: number;
+}
+
+export default function PostView() {
+  const { id } = useParams();
+  const [post, setPost] = useState<Post | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:7070/posts/${id}`
+        );
+        const data = await response.json();
+        setPost(data.post);
+      } catch (error) {
+        console.error("Ошибка при загрузке поста:", error);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      await fetch(`http://localhost:7070/posts/${id}`, {
+        method: "DELETE",
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Ошибка при удалении поста:", error);
+    }
+  };
+
+  const handleEdit = () => {
+    navigate(`/posts/${id}/edit`);
+  };
+
+  const handleBack = () => {
+    navigate("/");
+  };
+
+  if (!post) return <p className="loader">Загрузка...</p>;
+
+  return (
+    <div>
+      <p>{post.content}</p>
+      <div className="actions">
+        <button onClick={handleEdit}>Редактировать</button>
+        <button onClick={handleDelete}>Удалить</button>
+        <button type="button" onClick={handleBack}>
+          На главную
+        </button>
+      </div>
+    </div>
+  );
+}
