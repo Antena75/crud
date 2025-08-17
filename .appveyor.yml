@@ -1,0 +1,20 @@
+environment:
+  nodejs_version: "22"
+
+branches:
+  only:
+    - master  # ветка git
+    - main
+
+cache: node_modules  # кеширование
+
+install:
+  - npm install  # команда установки зависимостей
+
+build: 
+- npm run build 
+
+dev:
+- npm run dev 
+
+test_script: off # скрипт тестирования
