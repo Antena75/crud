@@ -7,7 +7,7 @@ interface Props {
   isEdit?: boolean;
 }
 
-export default function PostForm({
+export default function CreateForm({
   onSave,
   initialContent = "",
   isEdit = false,

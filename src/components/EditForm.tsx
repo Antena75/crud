@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PostForm from "./PostForm";
+import CreateForm from "./CreateForm";
 
 interface Post {
   id: number;
@@ -8,7 +8,7 @@ interface Post {
   created: number;
 }
 
-export default function PostEdit() {
+export default function EditForm() {
   const { id } = useParams();
   const [post, setPost] = useState<Post | null>(null);
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function PostEdit() {
     const fetchPost = async () => {
       try {
         const response = await fetch(
-          `http://localhost:7070/posts/${id}`
+          `https://backend1-4m4g.onrender.com/posts/${id}`
         );
         const data = await response.json();
         setPost(data.post);
@@ -31,7 +31,7 @@ export default function PostEdit() {
 
   const handleSave = async (content: string) => {
     try {
-      await fetch(`http://localhost:7070/posts/${id}`, {
+      await fetch(`https://backend1-4m4g.onrender.com/posts/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: Number(id), content }),
@@ -45,6 +45,6 @@ export default function PostEdit() {
   if (!post) return <p>Загрузка...</p>;
 
   return (
-    <PostForm onSave={handleSave} initialContent={post.content} isEdit={true} />
+    <CreateForm onSave={handleSave} initialContent={post.content} isEdit={true} />
   );
 }

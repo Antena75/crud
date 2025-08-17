@@ -7,7 +7,7 @@ interface Post {
   created: number;
 }
 
-export default function PostList() {
+export default function ListForm() {
   const [posts, setPosts] = useState<Post[]>([]);
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ export default function PostList() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:7070/posts"
+          "https://backend1-4m4g.onrender.com/posts"
         );
         const data = await response.json();
         setPosts(data);

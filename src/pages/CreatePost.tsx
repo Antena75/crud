@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import PostForm from "../components/PostForm";
+import CreateForm from "../components/CreateForm";
 
 export default function NewPostPage() {
   const navigate = useNavigate();
 
   const handleSave = async (content: string) => {
     try {
-      await fetch("http://localhost:7070/posts", {
+      await fetch("https://backend1-4m4g.onrender.com/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: 0, content }),
@@ -21,7 +21,7 @@ export default function NewPostPage() {
     <div className="container">
       <div>
         <h2>Создание поста</h2>
-        <PostForm onSave={handleSave} />
+        <CreateForm onSave={handleSave} />
       </div>
     </div>
   );

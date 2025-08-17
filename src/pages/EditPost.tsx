@@ -1,11 +1,11 @@
-import PostEdit from "../components/PostEdit";
+import EditForm from "../components/EditForm";
 
 export default function EditPostPage() {
   return (
     <div className="container">
       <div>
         <h2>Редактирование поста</h2>
-        <PostEdit />
+        <EditForm />
       </div>
     </div>
   );

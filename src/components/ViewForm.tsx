@@ -7,7 +7,7 @@ interface Post {
   created: number;
 }
 
-export default function PostView() {
+export default function ViewForm() {
   const { id } = useParams();
   const [post, setPost] = useState<Post | null>(null);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function PostView() {
     const fetchPost = async () => {
       try {
         const response = await fetch(
-          `http://localhost:7070/posts/${id}`
+          `https://backend1-4m4g.onrender.com/posts/${id}`
         );
         const data = await response.json();
         setPost(data.post);
@@ -30,7 +30,7 @@ export default function PostView() {
 
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:7070/posts/${id}`, {
+      await fetch(`https://backend1-4m4g.onrender.com/posts/${id}`, {
         method: "DELETE",
       });
       navigate("/");
@@ -46,7 +46,7 @@ export default function PostView() {
   const handleBack = () => {
     navigate("/");
   };
-
+  
   if (!post) return <p className="loader">Загрузка...</p>;
 
   return (
