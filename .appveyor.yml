@@ -15,6 +15,3 @@ build: off
 
 build_script:
 - npm run build 
-
-dev_script:
-- npm run dev 
